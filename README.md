@@ -1,74 +1,359 @@
-# VeyForge-3D-Assets-and-Sim-to-Real
-TsingtaoAI · From physical objects to simulation, and from simulation back to the real world Core conclusion: Generation can be initiated with just 2 to 4 multi-view photos; a single asset is completed in about 30 seconds; it supports outputs such as GLB, PLY, USD/USDA, and connects to Isaac Sim, robot training, and real-machine validation.
-access the site through the link：https://veyforge.tsingtaoai.com/
+# VeyForge: AI 3D Assets and Sim-to-Real Infrastructure
 
-1. What is VeyForge? An AI 3D Asset Factory for Embodied Intelligence
-VeyForge is independently developed by TsingtaoAI, built for robotics developers, simulation engineers, and intelligent manufacturing teams. It is not just about generating a good-looking model; it is an end-to-end asset engine that connects input, generation, rendering, physics, simulation, and real-world validation.
+<div align="center">
 
-The official website summarizes it as an AI-driven 3D asset factory from physical objects to simulation: users can take multi-view photos of real objects with a smartphone or input natural language descriptions. The platform automatically completes 3D reconstruction and exports assets into standard formats suitable for different R&D stages. These are then applied to the Isaac Sim platform to achieve one-click digital twins (Real-to-Sim) from real objects to simulation scenes. The reconstructed 3D assets are converted into USD format and automatically bound with physical properties (mass, inertia, collision bodies) and interactive Articulation structures, allowing them to be directly loaded into robot simulation scenes as objects to be grasped or manipulated. On this basis, the platform closes the Sim-to-Real loop: users can complete robot motion planning, grasping strategy training, reinforcement learning, and visual data synthesis in Isaac Sim, then replay validated strategies and trajectories onto real robots. This enables a complete digital twin R&D pipeline: "Real object photo/description → 3D reconstruction → Standard format assets → Isaac Sim simulation validation → Real robot deployment," significantly shortening the R&D cycle from physical objects to simulation and then to real-world deployment.
+**From physical objects to simulation, and from simulation back to the real world.**
 
-Figure: From multi-view image input, to AI-generated 3D assets, to Isaac Sim simulation applications, and deployment to real machines.
+[Try VeyForge](https://veyforge.tsingtaoai.com/) | [TsingtaoAI](https://github.com/TsingtaoAI)
 
-The value of this pipeline lies in the fact that model generation is no longer the end of the R&D process, but the starting point for robot training, scene testing, and real-world deployment.
+<br />
 
-2. Three Input Methods: Turning Both the Real World and the Imagined World into Assets
-2.1. Multi-view Images to 3D: Reconstructing Real Objects with 2 to 4 Photos
-Users simply take photos of the same object from different angles using a smartphone, and VeyForge can reconstruct the object's spatial structure, appearance, materials, and textures based on the multi-view information. Compared to a single image, multi-view input reduces occlusion and information loss, making it more suitable for robot simulation and digital twin projects that require higher geometric fidelity.
+<img src="assets/image2.png" alt="VeyForge real-to-sim-to-real workflow" width="900" />
 
-2.2. Single Image to 3D: Quickly Bringing Existing Image Assets into the Digital World
-For product photos, historical images, commercial materials, and on-site captured images, the platform supports generating 3D assets from a single image. This is suitable for rapid validation, concept display, and large-scale asset pre-screening.
+</div>
 
-2.3. Text to 3D: Turning a Sentence into a Visual Prototype
-Input a natural language description, such as "a red apple with smooth surface," to generate the corresponding 3D asset. Robot props, game scenes, industrial parts, and creative prototypes can all be quickly formed through text first, then enter subsequent screening and simulation processes.
+VeyForge is an AI-driven 3D asset factory for embodied intelligence, robotics simulation, digital twins, and robot training. It turns photos, images, or text prompts into usable 3D assets, adds simulation-oriented physical properties, and connects those assets to Isaac Sim, Isaac Lab, ROS 2, and real robot validation.
 
-From images to text, VeyForge lowers the barrier to 3D content production and allows algorithm engineers and scene designers to participate more directly in asset creation.
+The goal is not only to generate a model that looks right. The goal is to produce an asset that a robot can perceive, collide with, grasp, move, test, and improve through a repeatable data loop.
 
-3. From Input to Output: A Fully Automated Asset Production Pipeline
-Step 1: Material Input. Supports multi-view images, single images, and text descriptions; basic collection can be done with a smartphone.
-Step 2: AI Generation. The platform automatically performs background processing, sparse skeleton generation, and structured latent variable generation—first determining the overall spatial structure, then adding geometric and texture details.
-Step 3: Real-time Preview. Users can view Gaussian rendering, normal rendering, and interactive 3D models to identify structural, texture, and perspective issues in advance.
-Step 4: Format Export. Depending on the use case, output GLB mesh models, PLY Gaussian point clouds, and USD/USDA physical assets for simulation.
-Step 5: Enter Simulation and Training. Assets can be used for grasping, navigation, collision, stacking, conveyor belt loading/unloading, and closed-loop testing in Isaac Sim.
+## At a Glance
 
-Figure: Preview of generated Gaussian and normal rendering, supporting model quality inspection before export.
+| Capability | VeyForge |
+| --- | --- |
+| Multi-view input | Reconstruct an object from 2 to 4 photos |
+| Other inputs | Single-image-to-3D and text-to-3D |
+| Typical generation time | About 30 seconds per asset, depending on input and settings |
+| Visual outputs | GLB mesh, PLY Gaussian point cloud |
+| Simulation outputs | USD / USDA physical assets and URDF-oriented workflows |
+| Preview modes | Interactive 3D, Gaussian rendering, and normal rendering |
+| Physics support | Mass, density, center of mass, inertia, collision bodies, friction, and restitution |
+| Simulation integration | NVIDIA Isaac Sim and web-based IsaacSim-qt workflows |
+| Training integration | Isaac Lab and IsaacLab-Arena style Scene / Embodiment / Task composition |
+| Real robot integration | ROS 2 joint-state synchronization and Sim-to-Real validation |
+| Deployment options | Cloud service, enterprise integration, and private deployment scenarios |
 
-4. More Than Just Generating Models: VeyForge Gives Assets Physical Properties
-What robots need is not a beautiful texture, but a digital object capable of physical interaction. VeyForge can further calculate mass, volume, center of mass, and inertia tensor based on the generated GLB mesh, and configure corresponding physical parameters.
+## Why VeyForge?
 
-Configurable physical properties include:
+Robots need more than a collection of attractive meshes. A useful robot asset must carry enough visual, geometric, semantic, and physical information to participate in a task.
 
-Mass and Density: Used to establish the object's weight and force relationships.
+Traditional asset production often requires separate steps for:
 
-Collision Body Types: Supports options such as none, convexHull, convexDecomposition, boundingCube, and boundingSphere.
+- Photography and reference collection
+- 3D modeling and texturing
+- Mesh cleanup and optimization
+- Collision-body construction
+- Mass, friction, and inertia configuration
+- USD or URDF adaptation
+- Simulator loading and task-specific repair
+- Real robot validation
 
-Static and Dynamic Friction: Used to simulate friction behavior during object contact, sliding, and grasping.
+VeyForge brings these steps into one production-oriented workflow. It makes asset creation accessible to robotics and simulation teams, while preserving the technical controls needed for high-quality datasets and physical interaction.
 
-Restitution Coefficient: Used to control the bounce effect after collision.
+## End-to-End Pipeline
 
-These parameters can ultimately be written into USDA assets and checked in the physical visualization interface for visual meshes and collision meshes, providing a foundation closer to the real world for robot grasping and interaction training.
+```mermaid
+flowchart LR
+    A[Real object<br/>or text prompt] --> B[Images or prompt input]
+    B --> C[AI 3D reconstruction]
+    C --> D[Interactive preview]
+    D --> E[GLB / PLY export]
+    D --> F[Physics configuration]
+    F --> G[USD / USDA / URDF workflow]
+    G --> H[Isaac Sim scenes]
+    H --> I[Isaac Lab training]
+    I --> J[ROS 2 and real robot]
+    J --> K[Results and failure data]
+    K --> B
+```
 
+This workflow supports the full engineering loop:
 
-Figure: Physical property visualization interface, allowing simultaneous viewing of visual mesh, collision mesh, center of mass, density, inertia, and mass information.
+**Real object or description -> 3D reconstruction -> robot-ready asset -> simulation -> policy training -> real robot validation -> data feedback.**
 
-5. Sim-to-Real: Letting Robots Learn in Simulation and Work in Reality
-For embodied intelligence, the endpoint of 3D asset generation is not "looking similar in simulation," but whether the robot can transfer capabilities learned in simulation to the real world. This process is commonly referred to as Sim-to-Real, i.e., capability transfer from Simulation to Reality.
+## Three Ways to Create Assets
 
-VeyForge's value lies in filling in the most easily underestimated asset and scene gaps before Sim-to-Real: making the shape, material, scale, collision relationships, and physical properties of objects in simulation closer to real objects, so that training data no longer stays at the level of idealized models.
+### 1. Multi-view image to 3D
 
-5.1. Real to Sim: Bringing Real Objects into Simulation
-Take multi-view photos of real objects, generate textured 3D models, then add physical properties such as collision bodies, mass, friction, and inertia, and finally import them into Isaac Sim. In this way, target objects in robot training scenes are no longer just geometric approximations, but interactive assets with both visual and physical information.
+Take 2 to 4 photos of the same object from different angles. Multi-view input provides more geometric evidence, reduces occlusion-related ambiguity, and is well suited to digital-twin and robot-simulation workflows.
 
-5.2. Sim: Low-cost, High-density Training in the Digital World
-In simulation environments, it is possible to rapidly change the shape, size, material, placement, lighting conditions, and background environment of target objects, and batch-generate data for different tasks, perspectives, and difficulty levels. For tasks such as grasping, stacking, navigation, obstacle avoidance, and loading/unloading, simulation can handle a large amount of repetitive training and dangerous scenario testing.
+![Multi-view asset generation workflow](assets/image1.png)
 
-5.3. Domain Randomization: Letting Models See More Variations
-The real world always has lighting changes, occlusions, reflections, background interference, and object differences. The multi-category, multi-texture, and multi-shape assets generated by VeyForge can serve as a foundation for data generalization, helping training systems encounter more variations during the simulation phase and reducing the risk of models adapting to only a single scenario.
+### 2. Single image to 3D
 
-5.4. Sim to Real: Transferring Simulation Strategies to Real Machines
-After the robot completes strategy training in the simulation environment, control strategies, perception results, and action flows can be transferred to real robots. The real2sim2real process showcased on the official website further emphasizes that actions and states on the virtual and real sides can be synchronized, and tasks such as grasping and palletizing can be validated and compared between simulation and real machines.
+Bring product photos, historical images, catalog images, or on-site captures into the digital world. Single-image generation is useful for fast concept validation, asset screening, and early scene prototyping.
 
-5. Real to Sim: Letting Real Failures Feed Back into the Next Training Round
-Failure cases during real machine operation, such as grasping offset, object slipping, collision misjudgment, and navigation deviation, can be brought back into the simulation environment and transformed into new asset parameters, scene conditions, or training samples. Thus, the process is no longer a one-time simulation-to-real transfer, but a continuous closed loop of real collection—simulation training—real machine validation—data feedback—retraining.
+### 3. Text to 3D
 
-The key to Sim-to-Real is not just importing a model into a simulator, but enabling assets, scenes, physics, data, and strategies to form an iterable closed loop. VeyForge is turning the asset preparation at the front end of this loop into scalable engineering capability.
+Use a natural-language description such as `a red apple with a smooth surface` to create a visual prototype. Text-generated assets can be used for concept exploration, scene prototyping, and downstream selection before simulation.
+
+## From Input to Export
+
+The production pipeline is designed around fast inspection and practical downstream formats:
+
+1. **Input** - Upload multi-view images, a single image, or a text description.
+2. **AI generation** - Process the input and reconstruct geometry, appearance, and texture.
+3. **Quality inspection** - Review Gaussian rendering, normal rendering, and an interactive 3D view.
+4. **Asset export** - Export visual assets and simulation-oriented formats.
+5. **Simulation and training** - Bring the result into robot scenes, task validation, and training.
+
+![Gaussian and normal rendering preview](assets/image3.png)
+
+The preview stage helps teams identify geometry, texture, orientation, and viewpoint issues before an asset is added to a larger scene or dataset.
+
+## Physics-Ready Assets
+
+VeyForge extends visual asset generation into physical asset preparation. A generated mesh can be used to estimate or configure:
+
+- Mass and density
+- Volume and center of mass
+- Inertia tensor
+- Visual and collision meshes
+- Static and dynamic friction
+- Restitution coefficient
+- Collision-body representation
+
+Supported collision representations can include:
+
+```text
+none
+convexHull
+convexDecomposition
+boundingCube
+boundingSphere
+```
+
+The resulting parameters can be written into USDA assets and inspected in a physics visualization workflow. This is important for grasping, stacking, contact, sliding, loading, and manipulation tasks where appearance alone is not enough.
+
+![Physics property visualization](assets/image4.png)
+
+## Real-to-Sim and Sim-to-Real
+
+VeyForge treats 3D assets as the front end of a closed-loop robotics system.
+
+```mermaid
+flowchart TB
+    R[Real-world object and task] --> P[Capture photos or collect data]
+    P --> A[Generate and parameterize asset]
+    A --> S[Build Isaac Sim scene]
+    S --> T[Train or validate policy]
+    T --> X[Execute on real robot]
+    X --> F[Measure success and failure]
+    F --> U[Update assets, scenes, and training data]
+    U --> S
+```
+
+### Real to Sim
+
+1. Capture a real object from multiple views.
+2. Generate a textured 3D model.
+3. Add collision, mass, friction, and inertia information.
+4. Convert or export the asset for Isaac Sim.
+5. Use the asset as an object that a robot can perceive and manipulate.
+
+### Simulation
+
+In simulation, teams can vary:
+
+- Object shape, size, and material
+- Object pose and placement
+- Lighting and background
+- Collision and friction parameters
+- Task difficulty and scene composition
+
+This enables large numbers of grasping, stacking, navigation, obstacle-avoidance, and loading/unloading experiments without consuming real robot time.
+
+### Domain randomization
+
+Multiple categories, textures, shapes, and scene configurations help training systems encounter more variation before deployment. This can reduce overfitting to one idealized object or one fixed environment.
+
+### Sim to Real
+
+Validated policies, trajectories, perception results, and task logic can be transferred to a real robot for controlled testing. Real execution results can then become new simulation conditions and training samples.
+
+## Isaac Sim and Web-Based Task Simulation
+
+The VeyForge workflow is designed to continue after asset generation. In the accompanying IsaacSim-qt style platform, users can upload GLB or USD assets, select a scene, configure task parameters, launch simulation, and observe the run from a browser-oriented interface.
+
+The simulation workflow can expose:
+
+- Asset upload and conversion
+- Scene selection
+- Scale and mass configuration
+- Pick and place offsets
+- Conveyor speed
+- Simulation status and task control
+- Extensible scene plugins and task parameters
+
+### Conveyor loading and unloading
+
+![Conveyor loading and unloading simulation](assets/image6.png)
+
+Use generated assets to test robotic loading, unloading, grasping, placement, and conveyor workflows.
+
+### Kitchen organization
+
+![Kitchen organization simulation](assets/image7.png)
+
+Configure objects and task parameters for tabletop and kitchen-style manipulation scenarios.
+
+### General pick and place
+
+![General pick and place simulation](assets/image8.png)
+
+Validate the complete flow from target selection and approach to grasp, transport, placement, and release.
+
+### Autonomous shelf workflows
+
+![Autonomous shelf simulation](assets/image9.png)
+
+Reuse the same asset in a business-oriented flow such as shelf picking, replenishment, and placement at a checkout or staging area.
+
+## ROS 2 and Real Robot Synchronization
+
+For real robot integration, a shared joint-state interface can connect the virtual and physical sides of the system.
+
+```mermaid
+sequenceDiagram
+    participant R as Real robot
+    participant N as ROS 2 node
+    participant S as Isaac Sim
+    participant T as Task controller
+
+    R->>N: Read or execute joint state
+    N->>S: Publish real state
+    S->>T: Update simulated robot and task
+    T->>S: Produce target action
+    S->>N: Publish simulated command
+    N->>R: Convert and send command
+    R->>N: Return measured state
+```
+
+In a representative myCobot Pro 450 and myGripper F100 integration:
+
+- `sensor_msgs/JointState` acts as the shared ROS 2 interface.
+- The real side can use the `pymycobot` SDK.
+- Isaac Sim can publish and subscribe through Action Graph nodes.
+- Joint names are kept consistent across both sides.
+- Angle units and gripper opening values are converted at the interface.
+- A pick-and-place controller can run through home, pre-grasp, grasp, close, lift, pre-place, place, release, and return states.
+- Measured real joint angles can be written back to the simulation side for comparison.
+
+This makes it possible to validate actions in simulation, execute them on hardware, and inspect the difference between planned and measured behavior.
+
+## Isaac Lab and Task-Scale Training
+
+For larger experiments, generated assets can be composed into Isaac Lab or similar GPU-accelerated training environments. An Arena-style architecture can keep three concerns separate:
+
+| Layer | Responsibility |
+| --- | --- |
+| Scene | Layout, objects, asset parameters, and environment conditions |
+| Embodiment | Robot body, joints, end effectors, and sensors |
+| Task | Grasping, navigation, opening, turning, insertion, sorting, or organization goals |
+
+The same VeyForge asset set can therefore be reused across different robots, scenes, and tasks. This helps teams move from a single demonstration to reinforcement learning, imitation learning, motion planning, and multi-task training.
+
+![Batch 3D asset generation entry point](assets/image10.png)
+
+Batch input can organize multiple objects and multi-view images as a ZIP package and produce outputs such as GLB, PLY, USDA, and URDF-oriented assets for dataset production.
+
+## Application Areas
+
+![Application directions](assets/image11.png)
+
+### Zero-shot grasping and dexterous manipulation
+
+Generate diverse object shapes, materials, and sizes, then add physical parameters for grasp policy training, failure replay, and generalization testing.
+
+### Mobile robotics and autonomous driving corner cases
+
+Build uncommon, complex, or high-risk scene elements for simulation-based safety and perception testing.
+
+### Industrial workcells and conveyor operations
+
+Digitize equipment, products, conveyors, and manipulated objects before deployment. Validate loading, unloading, palletizing, stacking, and grasping logic in simulation.
+
+### Physics-aware digital twins
+
+Combine visual models, physical parameters, and scene semantics for facility inspection, warehouse logistics, industrial workcell replication, and vehicle simulation.
+
+### Scalable asset and training-data production
+
+Use batch generation, consistent parameters, automated exports, and task management to connect asset production to an existing engineering pipeline.
+
+## Why It Matters for Teams
+
+| Traditional workflow | VeyForge workflow |
+| --- | --- |
+| Multiple manual tools and handoffs | One connected asset-to-simulation pipeline |
+| Hours or days for a single asset | Fast AI-assisted generation and inspection |
+| Specialist modeling resources required | Images, prompts, and configurable technical controls |
+| Visual mesh is often separated from physics setup | Visual, collision, and physical properties can be prepared together |
+| Simulator adaptation happens late | Isaac Sim and task workflows are part of the target pipeline |
+| Real robot results are difficult to feed back | Real-to-sim-to-real iteration is an explicit design goal |
+
+![Traditional modeling compared with VeyForge](assets/image12.png)
+
+The result is a practical data flywheel:
+
+```mermaid
+flowchart LR
+    A[More assets] --> B[More scenes and tasks]
+    B --> C[More training coverage]
+    C --> D[Better robot policies]
+    D --> E[More real-world tests]
+    E --> F[More failure and success data]
+    F --> A
+```
+
+## A Typical Project Workflow
+
+1. **Capture** - Take 2 to 4 photos of the target object, or prepare a single image or text description.
+2. **Generate** - Select the input mode and start AI reconstruction.
+3. **Inspect** - Review Gaussian, normal, and interactive 3D previews.
+4. **Physicalize** - Configure mass, density, friction, restitution, and collision representation.
+5. **Export** - Produce GLB, PLY, USD, USDA, or URDF-oriented outputs as required.
+6. **Simulate** - Run grasping, navigation, stacking, loading, unloading, or corner-case tests.
+7. **Train** - Use the asset in policy training, imitation learning, reinforcement learning, or motion planning.
+8. **Deploy and learn** - Validate on a real robot and feed results back into the next simulation round.
+
+## Deployment and Integration
+
+VeyForge is intended to support different team sizes and deployment requirements:
+
+- Web-based SaaS experimentation
+- Enterprise workflows and API integration
+- Private or on-premise deployment scenarios
+- Batch asset generation and standardized output
+- Integration with simulation, automation, and data-production systems
+
+The product website is the primary entry point for trying the VeyForge experience:
+
+**[veyforge.tsingtaoai.com](https://veyforge.tsingtaoai.com/)**
+
+## Media Gallery
+
+<table>
+  <tr>
+    <td><img src="assets/image3.png" alt="Gaussian and normal rendering preview" width="420" /></td>
+    <td><img src="assets/image4.png" alt="Physics visualization" width="420" /></td>
+  </tr>
+  <tr>
+    <td><img src="assets/image5.png" alt="RGB and depth visualization" width="420" /></td>
+    <td><img src="assets/image6.png" alt="Conveyor simulation" width="420" /></td>
+  </tr>
+  <tr>
+    <td><img src="assets/image7.png" alt="Kitchen organization simulation" width="420" /></td>
+    <td><img src="assets/image8.png" alt="Pick and place simulation" width="420" /></td>
+  </tr>
+  <tr>
+    <td><img src="assets/image9.png" alt="Autonomous shelf simulation" width="420" /></td>
+    <td><img src="assets/image10.png" alt="Batch asset generation" width="420" /></td>
+  </tr>
+</table>
+
+## About TsingtaoAI
+
+VeyForge is developed by TsingtaoAI for robotics developers, simulation engineers, embodied-intelligence teams, and intelligent-manufacturing organizations.
+
+For product access, technical collaboration, robot simulation, digital twins, batch asset generation, or private deployment, visit the [VeyForge product website](https://veyforge.tsingtaoai.com/).
 
