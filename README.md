@@ -8,7 +8,12 @@
 
 <br />
 
-<img src="assets/image2.png" alt="VeyForge real-to-sim-to-real workflow" width="900" />
+<table>
+  <tr>
+    <td><img src="assets/image1.png" alt="VeyForge multi-view input and AI-generated 3D asset workflow" width="440" /></td>
+    <td><img src="assets/image2.png" alt="VeyForge Isaac Sim and real-to-sim-to-real workflow" width="440" /></td>
+  </tr>
+</table>
 
 </div>
 
@@ -356,4 +361,3 @@ The product website is the primary entry point for trying the VeyForge experienc
 VeyForge is developed by TsingtaoAI for robotics developers, simulation engineers, embodied-intelligence teams, and intelligent-manufacturing organizations.
 
 For product access, technical collaboration, robot simulation, digital twins, batch asset generation, or private deployment, visit the [VeyForge product website](https://veyforge.tsingtaoai.com/).
-
