@@ -19,8 +19,13 @@
 
 ## Product Demos
 
-- [Watch Demo 4](assets/demo4.mp4)
-- [Watch Demo 5](assets/demo5.mp4)
+<video controls width="720">
+  <source src="https://github.com/TsingtaoAI/VeyForge/raw/refs/heads/main/assets/demo4.mp4" type="video/mp4">
+</video>
+
+<video controls width="720">
+  <source src="https://github.com/TsingtaoAI/VeyForge/raw/refs/heads/main/assets/demo5.mp4" type="video/mp4">
+</video>
 
 VeyForge is an AI-driven 3D asset factory for embodied intelligence, robotics simulation, digital twins, and robot training. It turns photos, images, or text prompts into usable 3D assets, adds simulation-oriented physical properties, and connects those assets to Isaac Sim, Isaac Lab, ROS 2, and real robot validation.
 
